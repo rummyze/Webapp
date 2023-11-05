@@ -36,12 +36,35 @@ function getNoteTemplate(note) {
     </li>`
 }
 
+const hello = {
+  val1: "foo",
+  val2: "bar",
+  val3: function (params) {
+    console.log("this: ", this);
+  }
+}
+
+function closures() {
+  const array = [1, 2, 3];
+  
+  setTimeout(() => {
+    for (var index = 0; index < array.length; index++) {
+      setTimeout(() => {
+        console.log("index: ", index);
+        console.log("x: ", array[index] + 4);
+      }, 1000);
+    }
+  }, 1500);
+}
+
+closures();
+
 function render() {
     // for (let i = 0; i < notes.length; i++) {
     //     listElement.insertAdjacentHTML('beforeend', getNoteTemplate(notes[i]))
     // }
-    for (let note of notes) {
-        listElement.insertAdjacentHTML('beforeend', getNoteTemplate(note))
-    }
+  notes.forEach((item) => {
+    listElement.insertAdjacentHTML('beforeend', getNoteTemplate(item))
+  });
 }
 render()
