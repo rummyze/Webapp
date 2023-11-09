@@ -34,12 +34,12 @@ sortOptions.addEventListener('change', function (e) {
     render();
 });
 
-function sortNotes(sortNotes) {
-    if (sortNotes === 'title') {
+function sortNotes(sortOption) {
+    if (sortOption === 'title') {
         notes.sort((a, b) => a.title.localeCompare(b.title));
-    } else if (sortNotes === 'date') {
-        notes.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
-    } else if (sortNotes === 'completion') {
+    } else if (sortOption === 'date') {
+        notes.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+    } else if (sortOption === 'completion') {
         notes.sort((a, b) => (a.stateOfComplications === b.stateOfComplications) ? 0 : a.stateOfComplications ? -1 : 1);
     }
 }
