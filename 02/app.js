@@ -1,7 +1,11 @@
-// Получение элементов интерфейса
 const inputElement = document.getElementById('title');
 const createBtn = document.getElementById('create');
 const listElement = document.getElementById('list');
+const sortOptions = document.getElementById('sortOptions'); // Получаем элемент для сортировки
+
+// Загрузка заметок или установка начального значения
+let notes = loadNotes();
+render();
 
 // Загрузка заметок или установка начального значения
 function loadNotes() {
@@ -14,12 +18,30 @@ function saveNotes() {
     localStorage.setItem('notes', JSON.stringify(notes));
 }
 
+
 // Отображение заметок на странице
 function render() {
     listElement.innerHTML = '';
     notes.forEach((note, i) => {
         listElement.insertAdjacentHTML('beforeend', getNoteTemplate(note, i));
     });
+}
+
+// Сортировка заметок
+sortOptions.addEventListener('change', function (e) {
+    const sortOption = e.target.value;
+    sortNotes(sortOption);
+    render();
+});
+
+function sortNotes(sortNotes) {
+    if (sortNotes === 'title') {
+        notes.sort((a, b) => a.title.localeCompare(b.title));
+    } else if (sortNotes === 'date') {
+        notes.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
+    } else if (sortNotes === 'completion') {
+        notes.sort((a, b) => (a.stateOfComplications === b.stateOfComplications) ? 0 : a.stateOfComplications ? -1 : 1);
+    }
 }
 
 // Создание HTML-шаблона заметки
@@ -88,7 +110,7 @@ createBtn.onclick = function () {
         return;
     }
     const newNote = {
-        title: inputElement.value, stateOfComplications: false
+        title: inputElement.value, stateOfComplications: false, createdAt: new Date().toISOString()
     };
     notes.push(newNote);
     saveNotes();
@@ -96,6 +118,3 @@ createBtn.onclick = function () {
     inputElement.value = '';
 };
 
-// Инициализация приложения
-const notes = loadNotes();
-render();
