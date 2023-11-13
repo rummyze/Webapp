@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="styles.css">
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -23,6 +24,11 @@
             <option value="date">По дате создания</option>
             <option value="completion">По статусу выполнения</option>
         </select>
+    </div>
+    <div class="filter-options mb-3">
+        <label><input type="radio" name="filter" value="all" checked> Все заметки</label>
+        <label><input type="radio" name="filter" value="completed"> Выполненные</label>
+        <label><input type="radio" name="filter" value="uncompleted"> Невыполненные</label>
     </div>
     <button class="btn btn-outline-info w-100 mb-2" id="create">Создать</button>
     <ul class="list-group list-group-flush" id="list">
