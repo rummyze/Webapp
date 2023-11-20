@@ -1,0 +1,18 @@
+<h1 class='text-center'>Image Generator</h1>
+
+<form action="/" method="post">
+    <input
+            type="text"
+            class="form-control mb-2"
+            placeholder="Image params here"
+            required
+            name="prompt"
+    />
+    <select name="size" class="form-control mb-2">
+        <option value="256x256">S</option>
+        <option value="512x512">M</option>
+        <option value="1024x1024 ">L</option>
+    </select>
+    <input type="number" class="form-control mb-2" name="number" value="1"/>
+    <button type="submit" class="btn btn-primary ">Generate</button>
+</form>
